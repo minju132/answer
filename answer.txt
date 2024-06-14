@@ -1,0 +1,20 @@
+CREATE TABLE users (
+    user_no INT AUTO_INCREMENT PRIMARY KEY COMMENT '이용자 번호',
+    user_name VARCHAR(100) NOT NULL COMMENT '이름',
+    user_address VARCHAR(255) NOT NULL COMMENT '주소', 
+    user_phone VARCHAR(15) NOT NULL COMMENT '휴대폰 번호', 
+    user_status VARCHAR(50) NOT NULL COMMENT '상태',
+    FOREIGN KEY (user_no) REFERENCES books(user_no) 
+) ENGINE=INNODB COMMENT '이용자';
+
+CREATE TABLE books (
+    book_code INT AUTO_INCREMENT PRIMARY KEY COMMENT '도서 번호',
+    book_title VARCHAR(255) NOT NULL COMMENT '제목',     
+    book_quantity INT NOT NULL COMMENT '수량',            
+    book_status VARCHAR(50) NOT NULL COMMENT '상태', 
+    user_no INT COMMENT '이용자 번호',                              
+    rental_date DATE COMMENT '대여일',                        
+    FOREIGN KEY (user_no) REFERENCES users(user_no)
+) ENGINE=INNODB COMMENT '도서';
+
+이용자 번호 (user_no)에 foreign key를 두 테이블에 걸고 연결해야 원칙을 위반하지 않는다
